@@ -9,51 +9,68 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @State private var score = 0
+    @State private var highestScore = 0
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+        ZStack {
+            Color.white
+                .ignoresSafeArea()
+            VStack {
+                Text("Score: \(score)")
+                    .font(.largeTitle)
+                    .foregroundStyle(.black)
+                Text("Highest score: \(highestScore)")
+                    .font(.subheadline)
+                    .foregroundStyle(.gray)
+                VStack {
+                    Button {
+                        userClick()
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        ClickButton()
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    
+                    Button {
+                        gameRestart()
+                        } label: {
+                            RestartButton()
+                        }
                     }
                 }
             }
-        } detail: {
-            Text("Select an item")
+        }
+
+    func userClick() {
+        score += 1
+
+        if score > highestScore {
+            highestScore = score
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
+            
+    
+    func gameRestart() {
+        score = 0
     }
 }
+
+struct ClickButton: View {
+    var body: some View {
+        Image("Button")
+            .resizable()
+            .scaledToFit()
+    }
+}
+
+struct RestartButton: View {
+    var body: some View {
+        Image(systemName: "arrow.trianglehead.clockwise")
+            .foregroundStyle(.black)
+            .padding()
+            .glassEffect(.regular.tint(.white).interactive())
+        }
+    }
+
 
 #Preview {
     ContentView()
