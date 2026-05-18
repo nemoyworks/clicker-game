@@ -17,28 +17,28 @@ struct ContentView: View {
             // Background
             ZStack {
                 Color.white
-                .ignoresSafeArea()
+                    .ignoresSafeArea()
                 // Game UI
-                    VStack {
-                        Text("Score: \(score)")
-                            .font(.largeTitle)
-                            .foregroundStyle(.black)
-                        Text("Highest score: \(highestScore)")
-                            .font(.subheadline)
-                            .foregroundStyle(.gray)
-                        
-                        Button {
-                            userClick()
-                        } label: {
-                            ClickButton()
-                        }
-                        
-                        Button {
-                            gameRestart()
-                        } label: {
-                            RestartButton()
-                        }
+                VStack {
+                    Text("Score: \(score)")
+                        .font(.largeTitle)
+                        .foregroundStyle(.black)
+                    Text("Highest score: \(highestScore)")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                    
+                    Button {
+                        userClick()
+                    } label: {
+                        ClickButton()
                     }
+                    
+                    Button {
+                        gameRestart()
+                    } label: {
+                        RestartButton()
+                    }
+                }
                 // Settings
                 VStack {
                     HStack {
@@ -58,9 +58,25 @@ struct ContentView: View {
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack {
+                    HStack {
+                        NavigationLink() {
+                            AnalyticsPage()
+                        } label: {
+                            Image(systemName: "star")
+                                .padding()
+                                .foregroundStyle(.black)
+                                .glassEffect(.regular.tint(.white).interactive())
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    Spacer()
                 }
             }
         }
+    }
     
 
 
@@ -104,6 +120,14 @@ struct SettingsPage: View {
     }
 }
 
+struct AnalyticsPage: View {
+    var body: some View {
+        VStack {
+            
+        }
+        .navigationTitle("Achievements")
+    }
+}
         
 #Preview {
     ContentView()
