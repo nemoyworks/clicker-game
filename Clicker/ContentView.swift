@@ -43,6 +43,7 @@ struct ContentView: View {
                 VStack {
                     HStack {
                         Spacer()
+                        
                         NavigationLink() {
                             SettingsPage()
                         } label: {
@@ -53,6 +54,7 @@ struct ContentView: View {
                         }
                     }
                     .padding()
+                    
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -95,6 +97,10 @@ struct RestartButton: View {
 
 struct SettingsPage: View {
     var body: some View {
+        VStack {
+            
+        }
+        .navigationTitle("Settings")
     }
 }
 
