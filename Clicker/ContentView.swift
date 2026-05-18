@@ -13,32 +13,54 @@ struct ContentView: View {
     @State private var highestScore = 0
     
     var body: some View {
-        ZStack {
-            Color.white
+        NavigationStack {
+            // Background
+            ZStack {
+                Color.white
                 .ignoresSafeArea()
-            VStack {
-                Text("Score: \(score)")
-                    .font(.largeTitle)
-                    .foregroundStyle(.black)
-                Text("Highest score: \(highestScore)")
-                    .font(.subheadline)
-                    .foregroundStyle(.gray)
-                VStack {
-                    Button {
-                        userClick()
-                    } label: {
-                        ClickButton()
-                    }
-                    
-                    Button {
-                        gameRestart()
+                // Game UI
+                    VStack {
+                        Text("Score: \(score)")
+                            .font(.largeTitle)
+                            .foregroundStyle(.black)
+                        Text("Highest score: \(highestScore)")
+                            .font(.subheadline)
+                            .foregroundStyle(.gray)
+                        
+                        Button {
+                            userClick()
+                        } label: {
+                            ClickButton()
+                        }
+                        
+                        Button {
+                            gameRestart()
                         } label: {
                             RestartButton()
                         }
                     }
+                // Settings
+                VStack {
+                    HStack {
+                        Spacer()
+                        NavigationLink() {
+                            SettingsPage()
+                        } label: {
+                            Image(systemName: "gearshape")
+                                .padding()
+                                .foregroundStyle(.black)
+                                .glassEffect(.regular.tint(.white).interactive())
+                        }
+                    }
+                    .padding()
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
+    
+
 
     func userClick() {
         score += 1
@@ -65,13 +87,19 @@ struct ClickButton: View {
 struct RestartButton: View {
     var body: some View {
         Image(systemName: "arrow.trianglehead.clockwise")
-            .foregroundStyle(.black)
             .padding()
+            .foregroundStyle(.black)
             .glassEffect(.regular.tint(.white).interactive())
         }
     }
 
+struct SettingsPage: View {
+    var body: some View {
+        
+    }
+}
 
+        
 #Preview {
     ContentView()
         .modelContainer(for: Item.self, inMemory: true)
