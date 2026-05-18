@@ -63,7 +63,7 @@ struct ContentView: View {
                         NavigationLink() {
                             AnalyticsPage()
                         } label: {
-                            Image(systemName: "star")
+                            Image(systemName: "trophy")
                                 .padding()
                                 .foregroundStyle(.black)
                                 .glassEffect(.regular.tint(.white).interactive())
