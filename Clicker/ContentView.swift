@@ -86,7 +86,7 @@ struct ClickButton: View {
 
 struct RestartButton: View {
     var body: some View {
-        Image(systemName: "arrow.trianglehead.clockwise")
+        Text("Restart")
             .padding()
             .foregroundStyle(.black)
             .glassEffect(.regular.tint(.white).interactive())
@@ -95,7 +95,6 @@ struct RestartButton: View {
 
 struct SettingsPage: View {
     var body: some View {
-        
     }
 }
 
