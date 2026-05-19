@@ -80,8 +80,6 @@ struct ContentView: View {
         }
     }
     
-    
-    
     func userClick() {
         score += 1
         
@@ -92,6 +90,11 @@ struct ContentView: View {
     
     func gameRestart() {
         score = 0
+    }
+    
+    func gameReset() {
+        score = 0
+        highestScore = 0
     }
 }
 
@@ -112,6 +115,15 @@ struct RestartButton: View {
         }
     }
 
+struct ResetProgress: View {
+    var body: some View {
+        Text("Restart progress")
+            .padding()
+            .foregroundStyle(.red)
+            .glassEffect(.regular.tint(.white).interactive())
+    }
+}
+
 struct SettingsPage: View {
     @State private var sounds = true
     @State private var haptics = true
@@ -128,7 +140,17 @@ struct SettingsPage: View {
             Toggle("Dark mode", isOn: $darkMode)
                 .padding()
                 .glassEffect(.regular.tint(.white).interactive())
-            
+            VStack {
+                Spacer()
+                Button {
+                    ResetProgress()
+                } label: {
+                    Text("Reset progress")
+                        .padding()
+                        .foregroundStyle(.white)
+                        .glassEffect(.regular.tint(.red).interactive())
+                }
+            }
             Spacer()
         }
         .navigationTitle("Settings")
