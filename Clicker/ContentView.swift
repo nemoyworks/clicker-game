@@ -58,6 +58,8 @@ struct ContentView: View {
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                // Achievements
                 VStack {
                     HStack {
                         NavigationLink() {
@@ -112,20 +114,27 @@ struct RestartButton: View {
     }
 
 struct SettingsPage: View {
+    @State private var sounds = true
+    
     var body: some View {
         VStack {
+            Toggle("Sounds", isOn: $sounds)
+                .padding()
+                .glassEffect(.regular.tint(.white).interactive())
             
+            Spacer()
         }
         .navigationTitle("Settings")
+        .padding()
     }
 }
 
 struct AnalyticsPage: View {
+    
     var body: some View {
         VStack {
-            
         }
-        .navigationTitle("Achievements")
+    .navigationTitle("Achievements")
     }
 }
         
