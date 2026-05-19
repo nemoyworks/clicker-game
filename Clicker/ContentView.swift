@@ -115,10 +115,14 @@ struct RestartButton: View {
 
 struct SettingsPage: View {
     @State private var sounds = true
+    @State private var haptics = true
     
     var body: some View {
         VStack {
             Toggle("Sounds", isOn: $sounds)
+                .padding()
+                .glassEffect(.regular.tint(.white).interactive())
+            Toggle("Haptics", isOn: $haptics)
                 .padding()
                 .glassEffect(.regular.tint(.white).interactive())
             
