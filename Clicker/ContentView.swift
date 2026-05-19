@@ -80,16 +80,15 @@ struct ContentView: View {
         }
     }
     
-
-
+    
+    
     func userClick() {
         score += 1
-
+        
         if score > highestScore {
             highestScore = score
         }
     }
-            
     
     func gameRestart() {
         score = 0
@@ -116,6 +115,7 @@ struct RestartButton: View {
 struct SettingsPage: View {
     @State private var sounds = true
     @State private var haptics = true
+    @State private var darkMode = false
     
     var body: some View {
         VStack {
@@ -123,6 +123,9 @@ struct SettingsPage: View {
                 .padding()
                 .glassEffect(.regular.tint(.white).interactive())
             Toggle("Haptics", isOn: $haptics)
+                .padding()
+                .glassEffect(.regular.tint(.white).interactive())
+            Toggle("Dark mode", isOn: $darkMode)
                 .padding()
                 .glassEffect(.regular.tint(.white).interactive())
             
