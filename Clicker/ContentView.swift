@@ -17,6 +17,7 @@ struct ContentView: View {
             // Background
             ZStack {
                 Color.white
+                    .padding()
                     .ignoresSafeArea()
                 // Game UI
                 VStack {
@@ -128,7 +129,8 @@ struct SettingsPage: View {
     @State private var sounds = true
     @State private var haptics = true
     @State private var darkMode = false
-    
+    @State private var showAlert = false
+    let alertTitle = "Warning!"
     var body: some View {
         VStack {
             Toggle("Sounds", isOn: $sounds)
@@ -143,7 +145,7 @@ struct SettingsPage: View {
             VStack {
                 Spacer()
                 Button {
-                    ResetProgress()
+                    showAlert.toggle()
                 } label: {
                     Text("Reset progress")
                         .padding()
@@ -151,7 +153,17 @@ struct SettingsPage: View {
                         .glassEffect(.regular.tint(.red).interactive())
                 }
             }
+            
             Spacer()
+        }
+        .alert(alertTitle, isPresented: $showAlert) {
+            Button(role: .destructive) {
+                // Delete progress
+            } label: {
+                Text("Delete")
+            }
+        } message: {
+            Text("This will permanently erase all game data.")
         }
         .navigationTitle("Settings")
         .padding()
@@ -168,6 +180,6 @@ struct AnalyticsPage: View {
 }
         
 #Preview {
-    ContentView()
+    SettingsPage()
         .modelContainer(for: Item.self, inMemory: true)
 }
