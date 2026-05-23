@@ -142,7 +142,7 @@ struct SettingsPage: View {
                     Toggle("Haptics", isOn: $haptics)
                     
                     Toggle("Dark mode", isOn: $darkMode)
-                        
+                    
                 }
             }
             VStack {
@@ -156,23 +156,21 @@ struct SettingsPage: View {
                         .glassEffect(.regular.tint(.red).interactive())
                 }
             }
-            
-            Spacer()
-            
-                .alert(alertTitle, isPresented: $showAlert) {
-                    Button(role: .destructive) {
-                        // Delete progress
-                    } label: {
-                        Text("Delete")
-                    }
-                } message: {
-                    Text("This will permanently erase all game data.")
-                }
-                .navigationTitle("Settings")
-            
         }
+        .alert(alertTitle, isPresented: $showAlert) {
+            Button(role: .destructive) {
+                // Delete progress
+            } label: {
+                Text("Delete")
+            }
+        } message: {
+            Text("This will permanently erase all game data.")
+        }
+        .navigationTitle("Settings")
+        
     }
 }
+
 
 struct AnalyticsPage: View {
     
