@@ -130,18 +130,21 @@ struct SettingsPage: View {
     @State private var haptics = true
     @State private var darkMode = false
     @State private var showAlert = false
+    
     let alertTitle = "Warning!"
+    
     var body: some View {
-        VStack {
-            Toggle("Sounds", isOn: $sounds)
-                .padding()
-                .glassEffect(.regular.tint(.white).interactive())
-            Toggle("Haptics", isOn: $haptics)
-                .padding()
-                .glassEffect(.regular.tint(.white).interactive())
-            Toggle("Dark mode", isOn: $darkMode)
-                .padding()
-                .glassEffect(.regular.tint(.white).interactive())
+        ZStack {
+            VStack {
+                Form {
+                    Toggle("Sounds", isOn: $sounds)
+                    
+                    Toggle("Haptics", isOn: $haptics)
+                    
+                    Toggle("Dark mode", isOn: $darkMode)
+                        
+                }
+            }
             VStack {
                 Spacer()
                 Button {
@@ -155,18 +158,19 @@ struct SettingsPage: View {
             }
             
             Spacer()
+            
+                .alert(alertTitle, isPresented: $showAlert) {
+                    Button(role: .destructive) {
+                        // Delete progress
+                    } label: {
+                        Text("Delete")
+                    }
+                } message: {
+                    Text("This will permanently erase all game data.")
+                }
+                .navigationTitle("Settings")
+            
         }
-        .alert(alertTitle, isPresented: $showAlert) {
-            Button(role: .destructive) {
-                // Delete progress
-            } label: {
-                Text("Delete")
-            }
-        } message: {
-            Text("This will permanently erase all game data.")
-        }
-        .navigationTitle("Settings")
-        .padding()
     }
 }
 
@@ -175,11 +179,11 @@ struct AnalyticsPage: View {
     var body: some View {
         VStack {
         }
-    .navigationTitle("Achievements")
+        .navigationTitle("Achievements")
     }
 }
-        
+    
 #Preview {
-    SettingsPage()
+    ContentView()
         .modelContainer(for: Item.self, inMemory: true)
 }
