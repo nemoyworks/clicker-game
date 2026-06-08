@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var score = 0
     @State private var highestScore = 0
     
+    @State private var animationAmount = 1.0
+    
     var body: some View {
         NavigationStack {
             // Background
@@ -27,13 +29,20 @@ struct ContentView: View {
                     Text("Highest score: \(highestScore)")
                         .font(.subheadline)
                         .foregroundStyle(.gray)
-                    
+                    // Main Button
                     Button {
                         userClick()
                     } label: {
-                        ClickButton()
+                        Image("Button")
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(animationAmount)
+                            .animation(
+                                .easeInOut(duration: 0.2)
+                                .repeatCount(3, autoreverses: true),
+                            value: animationAmount)
                     }
-                    
+                    // Restart Button
                     Button {
                         gameRestart()
                     } label: {
@@ -82,6 +91,7 @@ struct ContentView: View {
     }
     
     func userClick() {
+        animationAmount += 1
         score += 1
         
         if score > highestScore {
@@ -96,14 +106,6 @@ struct ContentView: View {
     func gameReset() {
         score = 0
         highestScore = 0
-    }
-}
-
-struct ClickButton: View {
-    var body: some View {
-        Image("Button")
-            .resizable()
-            .scaledToFit()
     }
 }
 
