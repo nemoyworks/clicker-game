@@ -174,7 +174,7 @@ struct SettingsPage: View {
 }
 
 
-struct AnalyticsPage: View {
+struct AchievementsPage: View {
     
     var body: some View {
         VStack {
