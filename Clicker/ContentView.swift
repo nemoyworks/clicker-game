@@ -18,14 +18,11 @@ struct ContentView: View {
         NavigationStack {
             // Background
             ZStack {
-                Color.white
-                    .padding()
-                    .ignoresSafeArea()
                 // Game UI
                 VStack {
                     Text("Score: \(score)")
                         .font(.largeTitle)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                     Text("Highest score: \(highestScore)")
                         .font(.subheadline)
                         .foregroundStyle(.gray)
@@ -61,6 +58,7 @@ struct ContentView: View {
                                 .padding()
                                 .foregroundStyle(.black)
                                 .glassEffect(.regular.tint(.white).interactive())
+                                .shadow(radius: 2)
                         }
                     }
                     .padding()
@@ -79,6 +77,7 @@ struct ContentView: View {
                                 .padding()
                                 .foregroundStyle(.black)
                                 .glassEffect(.regular.tint(.white).interactive())
+                                .shadow(radius: 2)
                         }
                         Spacer()
                     }
@@ -115,6 +114,7 @@ struct RestartButton: View {
             .padding()
             .foregroundStyle(.black)
             .glassEffect(.regular.tint(.white).interactive())
+            .shadow(radius: 2)
         }
     }
 
