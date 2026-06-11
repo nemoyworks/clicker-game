@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var score = 1
+    @State private var score = 0
     @State private var highestScore = 0
     
     @State private var circleScale = 1.0
