@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var score = 0
+    @State private var score = 1
     @State private var highestScore = 0
     
-    @State private var animationAmount = 1.0
+    @State private var circleScale = 1.0
     
     var body: some View {
         NavigationStack {
@@ -33,11 +33,22 @@ struct ContentView: View {
                         Image("Button")
                             .resizable()
                             .scaledToFit()
-                            .scaleEffect(animationAmount)
-                            .animation(
-                                .easeInOut(duration: 0.2)
-                                .repeatCount(3, autoreverses: true),
-                            value: animationAmount)
+                            // Circle animation
+                            .overlay(
+                                Circle()
+                                    .stroke(.red)
+                                    .frame(width: 350, height: 350)
+                                    .scaleEffect(circleScale)
+                                    .opacity(2.0 - circleScale)
+                                    .animation(
+                                        .easeOut(duration: 1.5)
+                                        .repeatCount(3, autoreverses: false),
+                                        value: circleScale
+                                    )
+                            )
+                            .onAppear {
+                                circleScale = 2.0
+                            }
                     }
                     // Restart Button
                     Button {
@@ -58,7 +69,7 @@ struct ContentView: View {
                                 .padding()
                                 .foregroundStyle(.black)
                                 .glassEffect(.regular.tint(.white).interactive())
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                         }
                     }
                     .padding()
@@ -71,13 +82,13 @@ struct ContentView: View {
                 VStack {
                     HStack {
                         NavigationLink() {
-                            AnalyticsPage()
+                            AchievementsPage()
                         } label: {
                             Image(systemName: "trophy")
                                 .padding()
                                 .foregroundStyle(.black)
                                 .glassEffect(.regular.tint(.white).interactive())
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                         }
                         Spacer()
                     }
@@ -90,7 +101,6 @@ struct ContentView: View {
     }
     
     func userClick() {
-        animationAmount += 1
         score += 1
         
         if score > highestScore {
@@ -114,7 +124,7 @@ struct RestartButton: View {
             .padding()
             .foregroundStyle(.black)
             .glassEffect(.regular.tint(.white).interactive())
-            .shadow(radius: 2)
+            .shadow(radius: 1)
         }
     }
 
