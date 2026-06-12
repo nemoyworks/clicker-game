@@ -33,10 +33,11 @@ struct ContentView: View {
                         Image("Button")
                             .resizable()
                             .scaledToFit()
-                            // Circle animation
+                        // Circle animation
                             .overlay(
                                 Circle()
                                     .stroke(.red)
+                                    .blur(radius: 3.0)
                                     .frame(width: 350, height: 350)
                                     .scaleEffect(circleScale)
                                     .opacity(2.0 - circleScale)
@@ -44,10 +45,13 @@ struct ContentView: View {
                                         .easeOut(duration: 1.5)
                                         .repeatCount(3, autoreverses: false),
                                         value: circleScale
-                                    )
+                                        )
                             )
-                            .onAppear {
-                                circleScale = 2.0
+                            .onAppear() {
+                                circleScale = 1.0
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    circleScale = 2.0
+                                }
                             }
                     }
                     // Restart Button
